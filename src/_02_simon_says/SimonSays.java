@@ -55,6 +55,7 @@ int tries = 0;
 		// 16. If the keyCode matches the imageIndex and "Simon says"
 
 		// 17. Increase the value of score
+
 if(e.getKeyCode() == imageIndex) {
 	
 	if(simonSays == true) {
@@ -62,16 +63,19 @@ if(e.getKeyCode() == imageIndex) {
 		speak("correct");
 	}
 }
-else if(e.getKeyCode() == imageIndex) {
+else if (e.getKeyCode() != imageIndex) {
+
 	if(simonSays == false) {
 		points++;
 		speak("correct:");
 	}
-}
+
 else {
 	speak("incorrect");
 	tries++;
 }
+}
+showImage();
 		// 18. Use the speak method to tell the user they were correct
 
 		// 19. If the keyCode doesn't match the imageIndex and "Simon didn't
@@ -98,6 +102,7 @@ frame.dispose();
 		// 24. Call the showImage method to show a new image
 showImage();
 }
+
 	}
 
 	private void showImage() {
