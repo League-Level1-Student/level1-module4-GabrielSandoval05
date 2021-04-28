@@ -60,7 +60,7 @@ quizPanel.add(panel, "Technology");
 		// 5. Add the quizPanel to the frame
 frame.add(quizPanel);
 		// 6. Use the createButton method to set the value of firstButton
-firstButton=createButton("500$");
+firstButton=createButton("600$");
 		// 7. Add the firstButton to the quizPanel
 quizPanel.add(firstButton);
 		// 8. Write the code to complete the createButton() method below. Check that your
@@ -72,10 +72,19 @@ secondButton = createButton("400$");
 		// 10. Add the secondButton to the quizPanel
 quizPanel.add(secondButton);
 		// 11. Add action listeners to the buttons (2 lines of code)
-
+firstButton.addActionListener(this);
+secondButton.addActionListener(this);
 		// 12. Write the code to complete the actionPerformed() method below
 
 		// 13. Add buttons so that you have $200, $400, $600, $800 and $1000 questions
+		thirdButton = createButton("200$");
+		quizPanel.add(thirdButton);
+		thirdButton.addActionListener(this);
+		
+		fourthButton = createButton("800$");
+		quizPanel.add(fourthButton);
+		fourthButton.addActionListener(this);
+		
 		
 		 /*
 		 * [optional] Use the showImage or playSound methods when the user answers a
@@ -106,19 +115,37 @@ buttonCount++;
 	public void actionPerformed(ActionEvent e) {
 		
 		// Remove this temporary message after testing:
-		JOptionPane.showMessageDialog(null, "pressed " + ((JButton) e.getSource()).getText() + " button");
+		//JOptionPane.showMessageDialog(null, "pressed " + ((JButton) e.getSource()).getText() + " button");
 
 		JButton buttonPressed = (JButton) e.getSource();
 		// If the buttonPressed was the firstButton
+if(buttonPressed.equals(firstButton)){
+	
 
 			// Call the askQuestion() method
- 
+	askQuestion("What aquatic animal has the male give birth?", "Seahorse", 600);
+	firstButton.setText("");
+	}
 		// Complete the code in the askQuestion() method. When you play the game, the score should change.
 
 		// If the buttonPressed was the secondButton
+if(buttonPressed.equals(secondButton)) {
+	
 
 			// Call the askQuestion() method with a harder question
+	askQuestion("9+10=?", "19", 400);
+	secondButton.setText("");
+}
 
+if(buttonPressed.equals(thirdButton)) {
+	askQuestion("Whatis the best coding language?", "Java", 200 );
+	thirdButton.setText("");
+}
+
+if(buttonPressed.equals(fourthButton)) {
+	askQuestion("What is Timmy's favorite game", "Osu", 800);
+	fourthButton.setText("");
+}
 		// Clear the text on the button that was pressed (set the button text to nothing)
 
 	}
@@ -126,26 +153,32 @@ buttonCount++;
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
 		
 		// Use the playJeopardyTheme() method to play music while the use thinks of an answer
-		
+		playJeopardyTheme();
 		// Remove this temporary message and replace it with a pop-up that asks the user the question
-		JOptionPane.showMessageDialog(null, "this is where the question will be asked");
+		//JOptionPane.showMessageDialog(null, "this is where the question will be asked");
+	String answer =	JOptionPane.showInputDialog(question);
 		
 		// Stop the theme music when they have entered their response. Hint: use the sound variable 
-		
+		sound.stop();
 		// If the answer is correct
+if(answer.equalsIgnoreCase(correctAnswer)) {
+	
 
 			// Increase the score by the prizeMoney
-
+score = score + prizeMoney;
 			// Pop up a message to tell the user they were correct
-
+	JOptionPane.showMessageDialog(null, "You were correct");
+	updateScore();
+}
 		// Otherwise
-
+else {
 			// Decrement the score by the prizeMoney
-
+score = score - prizeMoney;
 			// Pop up a message to tell the user they were wrong and give them the correct answer
-
+JOptionPane.showMessageDialog(null, "You were incorrect, the correct was " + correctAnswer+ ".");
 		// Call the updateScore() method
-
+updateScore();
+}
 	}
 
 	public void playJeopardyTheme() {
